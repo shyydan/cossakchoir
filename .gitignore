@@ -1,0 +1,9 @@
+.DS_Store
+.cursor/
+.impeccable/mocks/
+.impeccable/questions/
+.impeccable/review/
+.impeccable/reference/
+.impeccable/hook.cache.json
+.impeccable/config.local.json
+*.log

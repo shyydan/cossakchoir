@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Казачий хор Анны Селезнёвой</title>
+  <meta name="description" content="Живые казачьи песни для свадеб, юбилеев и больших праздников. Анна и Александра Селезнёвы. Заказ: +7 915 497-14-21" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --white: #ffffff;
+      --ink: #14110f;
+      --mute: #4a433c;
+      --red: #c4102e;
+      --red-hot: #e01838;
+      --brass: #b0893c;
+      --brass-ink: #7a5f28;
+      --line: rgba(20, 17, 15, 0.08);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --pad: clamp(1.25rem, 4vw, 4rem);
+      color-scheme: light;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: Onest, system-ui, sans-serif;
+      font-weight: 500;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    ::selection { background: var(--red); color: #fff; }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; height: auto; }
+    :focus-visible {
+      outline: 2px solid var(--red);
+      outline-offset: 3px;
+    }
+
+    .wrap {
+      width: min(1200px, 100% - 2 * var(--pad));
+      margin-inline: auto;
+    }
+
+    /* ——— Nav ——— */
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s var(--ease);
+    }
+    .top.is-solid { border-bottom-color: var(--line); }
+    .top__inner {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      min-height: 4.25rem;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-weight: 800;
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      margin-right: auto;
+    }
+    .brand__pip {
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+    .nav {
+      display: none;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .nav a {
+      text-decoration: none;
+      color: var(--mute);
+      transition: color 0.2s var(--ease);
+    }
+    .nav a:hover { color: var(--ink); }
+    .nav a[aria-current="page"] { color: var(--red); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.85rem 1.5rem;
+      border-radius: 999px;
+      font: inherit;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+      transition: transform 0.2s var(--ease), background 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn--ink { background: var(--ink); color: #fff; }
+    .btn--ink:hover { background: #000; }
+    .btn--red {
+      background: var(--red);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(20, 17, 15, 0.18);
+    }
+    .btn--red:hover { background: var(--red-hot); }
+    .btn--ghost {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .btn--ghost:hover { border-color: var(--ink); }
+    .btn--lg {
+      padding: 1.1rem 1.9rem;
+      font-size: 1.15rem;
+    }
+
+    .menu-btn {
+      display: inline-flex;
+      width: 2.5rem;
+      height: 2.5rem;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      cursor: pointer;
+    }
+    .menu-btn span {
+      display: block;
+      width: 1rem;
+      height: 2px;
+      background: var(--ink);
+      position: relative;
+    }
+    .menu-btn span::before,
+    .menu-btn span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--ink);
+    }
+    .menu-btn span::before { top: -5px; }
+    .menu-btn span::after { top: 5px; }
+
+    .drawer {
+      display: none;
+      border-top: 1px solid var(--line);
+      padding: 1.15rem var(--pad) 1.4rem;
+      background: var(--white);
+    }
+    .drawer.is-open { display: grid; gap: 0.75rem; }
+    .drawer a {
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.5rem 0;
+    }
+
+    @media (min-width: 880px) {
+      .nav { display: flex; }
+      .menu-btn { display: none; }
+      .drawer { display: none !important; }
+    }
+
+    /* ——— Hero ——— */
+    .hero {
+      padding: 1.25rem 0 3rem;
+    }
+    .hero__stage {
+      position: relative;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      min-height: min(78vh, 700px);
+      background: var(--ink);
+      color: #fff;
+      isolation: isolate;
+    }
+    .hero__stage img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 60% 35%;
+      z-index: 0;
+    }
+    .hero__stage::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(
+        90deg,
+        rgba(20, 17, 15, 0.92) 0%,
+        rgba(20, 17, 15, 0.68) 42%,
+        rgba(20, 17, 15, 0.15) 72%,
+        rgba(20, 17, 15, 0.05) 100%
+      );
+    }
+    @media (max-width: 720px) {
+      .hero__stage::after {
+        background: linear-gradient(
+          180deg,
+          rgba(20, 17, 15, 0.35) 0%,
+          rgba(20, 17, 15, 0.82) 55%,
+          rgba(20, 17, 15, 0.95) 100%
+        );
+      }
+    }
+    .hero__copy {
+      position: relative;
+      z-index: 2;
+      max-width: 36rem;
+      padding: clamp(2rem, 6vw, 4.5rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: inherit;
+      animation: rise 0.9s var(--ease) both;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: none; }
+    }
+    .hero__copy h1 {
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      line-height: 1.02;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      max-width: 12ch;
+    }
+    .hero__copy p {
+      margin-top: 1.1rem;
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      line-height: 1.4;
+      color: #f2eee8;
+      max-width: 32ch;
+    }
+    .hero__cta { margin-top: 1.75rem; align-self: flex-start; }
+    .hero__cta small {
+      font-size: 0.85em;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+    .hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.75rem 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--mute);
+    }
+    .hero__meta b { color: var(--red); font-weight: 700; }
+
+    /* ——— Sections ——— */
+    section {
+      padding: clamp(3.5rem, 8vw, 6rem) 0;
+    }
+    .section__head {
+      max-width: 40rem;
+      margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+    }
+    .section__head h2 {
+      font-size: clamp(1.85rem, 4vw, 2.75rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .section__head p {
+      margin-top: 0.85rem;
+      color: var(--mute);
+      font-size: 1.05rem;
+      max-width: 42ch;
+    }
+
+    /* ——— Artists ——— */
+    .artists {
+      display: grid;
+      gap: 1.25rem;
+    }
+    @media (min-width: 800px) {
+      .artists { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    }
+    .artist {
+      display: grid;
+      gap: 1rem;
+    }
+    .artist__photo {
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: 1.25rem;
+      background: #1a1614;
+    }
+    .artist__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s var(--ease);
+    }
+    .artist:hover .artist__photo img { transform: scale(1.03); }
+    .artist h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .artist h3 span {
+      display: block;
+      margin-top: 0.2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--brass-ink);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .artist p { color: var(--mute); max-width: 36ch; }
+
+    /* ——— Videos ——— */
+    .videos {
+      display: grid;
+      gap: 1rem;
+    }
+    @media (min-width: 720px) {
+      .videos { grid-template-columns: repeat(3, 1fr); }
+    }
+    .video {
+      text-decoration: none;
+      display: grid;
+      gap: 0.75rem;
+    }
+    .video__thumb {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      border-radius: 1rem;
+      overflow: hidden;
+      background: var(--ink);
+    }
+    .video__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease), opacity 0.3s;
+    }
+    .video:hover .video__thumb img { transform: scale(1.04); opacity: 0.9; }
+    .video__play {
+      position: absolute;
+      inset: auto auto 1rem 1rem;
+      width: 2.85rem;
+      height: 2.85rem;
+      border-radius: 50%;
+      background: var(--red);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 6px 16px rgba(20, 17, 15, 0.22);
+    }
+    .video__play svg { width: 0.9rem; height: 0.9rem; margin-left: 2px; }
+    .video strong {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .video span {
+      display: block;
+      margin-top: 0.2rem;
+      font-size: 0.9rem;
+      color: var(--mute);
+      font-weight: 500;
+    }
+
+    /* ——— Contact ——— */
+    .contact {
+      background: #faf8f6;
+      border-radius: 1.75rem;
+      padding: clamp(2rem, 5vw, 3.5rem);
+      display: grid;
+      gap: 1.75rem;
+    }
+    @media (min-width: 800px) {
+      .contact {
+        grid-template-columns: 1.2fr 1fr;
+        align-items: end;
+      }
+    }
+    .contact h2 {
+      font-size: clamp(1.85rem, 4vw, 2.75rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .contact p {
+      margin-top: 0.85rem;
+      color: var(--mute);
+      max-width: 36ch;
+    }
+    .contact__phone {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: var(--red);
+      border-bottom: 3px solid var(--brass);
+      padding-bottom: 0.15rem;
+      display: inline-block;
+    }
+    .contact__phone:hover { color: var(--red-hot); }
+    .contact__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1.25rem;
+    }
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      margin-top: 1.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .socials a {
+      text-decoration: none;
+      color: var(--ink);
+      border-bottom: 1px solid var(--brass);
+      padding-bottom: 0.1rem;
+    }
+    .socials a:hover { color: var(--red); }
+
+    /* ——— Footer ——— */
+    footer {
+      padding: 2rem 0 2.5rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      color: var(--mute);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    footer a { color: var(--ink); text-decoration: none; }
+    footer a:hover { color: var(--red); }
+  </style>
+</head>
+<body>
+  <header class="top" id="top">
+    <div class="wrap top__inner">
+      <a class="brand" href="#top">
+        <span class="brand__pip" aria-hidden="true"></span>
+        Казачий хор Анны Селезнёвой
+      </a>
+      <nav class="nav" aria-label="Основная">
+        <a href="#top" aria-current="page">Главная</a>
+        <a href="#artists">Артисты</a>
+        <a href="#videos">Видео</a>
+        <a href="#contact">Контакты</a>
+      </nav>
+      <a class="btn btn--ink" href="tel:+79154971421">Заказать</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Меню">
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+    <div class="drawer" id="drawer" hidden>
+      <a href="#artists">Артисты</a>
+      <a href="#videos">Видео</a>
+      <a href="#contact">Контакты</a>
+      <a href="tel:+79154971421">+7 915 497-14-21</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="Главный экран">
+      <div class="wrap">
+        <div class="hero__stage">
+          <img src="assets/hero-stage.jpg" alt="Казачий хор Анны Селезнёвой на сцене" width="1600" height="1000" fetchpriority="high" />
+          <div class="hero__copy">
+            <h1>Казачий хор Анны Селезнёвой</h1>
+            <p>Живые казачьи песни для свадеб, юбилеев и больших праздников. Анна и Александра Селезнёвы.</p>
+            <a class="btn btn--red btn--lg hero__cta" href="tel:+79154971421">
+              <small>Звоните</small>
+              +7 915 497-14-21
+            </a>
+          </div>
+        </div>
+        <div class="hero__meta">
+          <span>Концерты · Свадьбы · Корпоративы</span>
+          <span>Заказ: <b>+7 915 497-14-21</b></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="artists">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>Два лица хора</h2>
+          <p>Сёстры Селезнёвы — руководитель и солистка. Живой звук, эфиры и сцена без «анонимного ансамбля».</p>
+        </div>
+        <div class="artists">
+          <article class="artist">
+            <div class="artist__photo">
+              <img src="assets/anna-portrait.jpg" alt="Анна Селезнёва" width="800" height="1000" loading="lazy" />
+            </div>
+            <div>
+              <h3>Анна Селезнёва <span>Руководитель</span></h3>
+              <p>Лицо хора, телеэфиры и постановка программы под формат вашего события.</p>
+            </div>
+          </article>
+          <article class="artist">
+            <div class="artist__photo">
+              <img src="assets/artist2.jpg" alt="Александра Селезнёва" width="800" height="1000" loading="lazy" />
+            </div>
+            <div>
+              <h3>Александра Селезнёва <span>Солистка</span></h3>
+              <p>Голос и сцена рядом с Анной — дуэт, который держит праздник.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="videos">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>Со сцены</h2>
+          <p>Коротко — как звучит и выглядит выступление. Больше кадров — в Instagram и на BandLink.</p>
+        </div>
+        <div class="videos">
+          <a class="video" href="https://www.instagram.com/cossackchoir_annaselezneva/" target="_blank" rel="noopener noreferrer">
+            <div class="video__thumb">
+              <img src="assets/video1.jpg" alt="" width="640" height="400" loading="lazy" />
+              <span class="video__play" aria-hidden="true">
+                <svg viewBox="0 0 12 14" fill="currentColor"><path d="M1 1.5v11l10-5.5L1 1.5z"/></svg>
+              </span>
+            </div>
+            <div>
+              <strong>Выступление</strong>
+              <span>Живой звук · Instagram</span>
+            </div>
+          </a>
+          <a class="video" href="https://www.instagram.com/cossackchoir_annaselezneva/" target="_blank" rel="noopener noreferrer">
+            <div class="video__thumb">
+              <img src="assets/video2.jpg" alt="" width="640" height="400" loading="lazy" />
+              <span class="video__play" aria-hidden="true">
+                <svg viewBox="0 0 12 14" fill="currentColor"><path d="M1 1.5v11l10-5.5L1 1.5z"/></svg>
+              </span>
+            </div>
+            <div>
+              <strong>Программа</strong>
+              <span>Сцена · костюмы</span>
+            </div>
+          </a>
+          <a class="video" href="https://band.link/" target="_blank" rel="noopener noreferrer">
+            <div class="video__thumb">
+              <img src="assets/cover-molitva.jpg" alt="" width="640" height="400" loading="lazy" />
+              <span class="video__play" aria-hidden="true">
+                <svg viewBox="0 0 12 14" fill="currentColor"><path d="M1 1.5v11l10-5.5L1 1.5z"/></svg>
+              </span>
+            </div>
+            <div>
+              <strong>«Молитва казачки»</strong>
+              <span>BandLink</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact">
+          <div>
+            <h2>Заказать выступление</h2>
+            <p>Напишите или позвоните — согласуем состав, репертуар и формат под ваше мероприятие.</p>
+            <div class="socials">
+              <a href="https://www.instagram.com/cossackchoir_annaselezneva/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://vk.com/merezhafolk" target="_blank" rel="noopener noreferrer">VK</a>
+              <a href="https://merezhafolk.ru" target="_blank" rel="noopener noreferrer">merezhafolk.ru</a>
+            </div>
+          </div>
+          <div>
+            <a class="contact__phone" href="tel:+79154971421">+7 915 497-14-21</a>
+            <div class="contact__actions">
+              <a class="btn btn--red" href="https://wa.me/79154971421" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+              <a class="btn btn--ghost" href="https://t.me/+79154971421" target="_blank" rel="noopener noreferrer">Telegram</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="wrap">
+    <footer>
+      <span>Казачий хор Анны Селезнёвой</span>
+      <a href="tel:+79154971421">+7 915 497-14-21</a>
+    </footer>
+  </div>
+
+  <script>
+    (() => {
+      const top = document.getElementById("top");
+      const btn = document.querySelector(".menu-btn");
+      const drawer = document.getElementById("drawer");
+      const onScroll = () => top.classList.toggle("is-solid", window.scrollY > 8);
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+
+      btn?.addEventListener("click", () => {
+        const open = drawer.classList.toggle("is-open");
+        drawer.hidden = !open;
+        btn.setAttribute("aria-expanded", String(open));
+      });
+      drawer?.querySelectorAll("a").forEach((a) => {
+        a.addEventListener("click", () => {
+          drawer.classList.remove("is-open");
+          drawer.hidden = true;
+          btn.setAttribute("aria-expanded", "false");
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
